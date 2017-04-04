@@ -1,12 +1,14 @@
 #pragma once
 
 #include <string>
+#include <vector>
 
 class Parser {
     private:
     
     public:
     Parser();
-    ~Parser();
-    virtual std::string parse(std::string input);
+    virtual ~Parser();
+    std::string extractTokens(const std::string &input, const std::string &delimiter) const;
+    virtual std::string parse(const std::string &input) = 0;
 };
