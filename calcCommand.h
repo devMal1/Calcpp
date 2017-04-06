@@ -15,5 +15,5 @@ class CalcCommand {
     std::string getOperation() const;
     std::vector<int> getArguments() const;
     bool commandless() const;
-    static std::string NO_OP = "";
+    static const std::string NO_OP;
 };

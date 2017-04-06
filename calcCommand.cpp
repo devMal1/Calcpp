@@ -15,9 +15,11 @@ std::string CalcCommand::getOperation() const {
 }
 
 std::vector<int> CalcCommand::getArguments() const {
-    return this->argumnets;
+    return this->arguments;
 }
 
 bool CalcCommand::commandless() const {
-    return this->operation == NO_OP || this->arguments.length() == 0;
+    return this->operation == NO_OP || this->arguments.size() == 0;
 }
+
+const std::string CalcCommand::NO_OP = "";

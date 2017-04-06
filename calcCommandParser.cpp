@@ -34,7 +34,7 @@ std::string extractOperation(const std::vector<string> &tokens) const {
 std::vector<int> extractArguments(const std::vector<string> &tokens) const {
     const NUM_OF_OPS = CalcCommandParser::OP_INDEX + 1;
     std::vector<int> arguments{};
-    for (int i = NUM_OF_OPS; i < tokens.length(); i ++) {
+    for (int i = NUM_OF_OPS; i < tokens.size(); i ++) {
         arguments.push_back(stoi(tokens[i]));
     }
     return arguments;
