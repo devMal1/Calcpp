@@ -15,6 +15,8 @@ std::vector<std::string> CalcCommandParser::extractTokens(const std::string &inp
         startIndex = delIndex + NEXT_CHAR;
         delIndex = input.find_first_of(delimiter, startIndex);
     }
+    tokens.push_back(input.substr(startIndex, std::string::npos)); //add last part of string
+    
     return tokens;
 }
 
@@ -49,6 +51,6 @@ CalcCommand CalcCommandParser::parse(const std::string &input) const {
     return cc;
 }
 
-const char DELIMITER = ' ';
-const int OP_INDEX = 0;
-const std::vector<std::string> COMMANDS{ "add", "sub", "mult", "div" }; //TODO check cplusplus for sets!
+const char CalcCommandParser::DELIMITER = ' ';
+const int CalcCommandParser::OP_INDEX = 0;
+const std::vector<std::string> CalcCommandParser::COMMANDS{ "add", "sub", "mult", "div" }; //TODO check cplusplus for sets!

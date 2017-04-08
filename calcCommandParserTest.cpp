@@ -7,8 +7,30 @@
 
 void testSuite(CalcCommand &cc, std::string expectedOp, 
     std::string expectedArgs, bool expectedCommandless);
+std::string vectorToString(const std::vector<int> &v);
 
 int main() {
+
+    std::string expected{ "A calc command with..." };
+    std::cout << "Testing parse() -> expecting: " + expected << std::endl;
+    CalcCommandParser ccParser{};
+    std::string input{ "add 2 4" };
+    CalcCommand cCommand{ ccParser.parse(input) };
+    // std::cout << "This is what we got..." << std::endl;
+    // std::cout << cCommand.getOperation() << std::endl;
+    // std::cout << vectorToString(cCommand.getArguments()) << std::endl;
+    // std::cout << cCommand.getArguments().size() << std::endl;
+    assert(cCommand.getOperation() == "add" &&
+        vectorToString(cCommand.getArguments()) == "2,4");
+
+    //test each operation function
+    //test no operation functions
+    //test a lot of arguments
+    //test float/double arguments
+    //test no operations
+    //test no arguments
+    //test out of order command (arguments then operation or seomthing)
+    //test using different delimite (not space)
     
     std::cout << "Woot woot, all tests passed!!" << std::endl;
 
