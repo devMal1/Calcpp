@@ -1,4 +1,4 @@
-// #include "calcCommandParser.h"
+#include "calcCommandParser.h"
 #include "calcCommand.h"
 #include <assert.h>
 #include <iostream>
@@ -9,28 +9,6 @@ void testSuite(CalcCommand &cc, std::string expectedOp,
     std::string expectedArgs, bool expectedCommandless);
 
 int main() {
-
-    CalcCommand cc;
-    testSuite(cc, "", "", true);
-
-    CalcCommand cc1{};
-    testSuite(cc1, "", "", true);
-
-    CalcCommand cc2{ "", {} };
-    testSuite(cc2, "", "", true);
-
-    CalcCommand cc3{ "", {1,2} };
-    testSuite(cc3, "", "1,2", true);
-
-    CalcCommand cc4{ "add", {} };
-    testSuite(cc4, "add", "", true);
-
-    CalcCommand cc5{ "add", {1,2} };
-    testSuite(cc5, "add", "1,2", false);
-
-    CalcCommand cc6{ "sub", {-1,2,300} };
-    testSuite(cc6, "sub", "-1,2,300", false);
-
     
     std::cout << "Woot woot, all tests passed!!" << std::endl;
 
