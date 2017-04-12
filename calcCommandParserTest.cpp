@@ -5,42 +5,62 @@
 #include <sstream>
 #include <string>
 
-void testSuite(CalcCommand &cc, std::string expectedOp, 
-    std::string expectedArgs, bool expectedCommandless);
-std::string vectorToString(const std::vector<int> &v);
+void testParse(const std::string &testInfo, const std::string &input, 
+    const std::string &expected_op, const std::string &expected_args);
 
 int main() {
 
-    std::string expected{ "A calc command with..." };
-    std::cout << "Testing parse() -> expecting: " + expected << std::endl;
     CalcCommandParser ccParser{};
-    std::string input{ "add 2 4" };
-    CalcCommand cCommand{ ccParser.parse(input) };
-    // std::cout << "This is what we got..." << std::endl;
-    // std::cout << cCommand.getOperation() << std::endl;
-    // std::cout << vectorToString(cCommand.getArguments()) << std::endl;
-    // std::cout << cCommand.getArguments().size() << std::endl;
-    assert(cCommand.getOperation() == "add" &&
-        vectorToString(cCommand.getArguments()) == "2,4");
 
-    //test each operation function
-    //test no operation functions
-    //test a lot of arguments
-    //test float/double arguments
-    //test no operations
-    //test no arguments
-    //test out of order command (arguments then operation or seomthing)
-    //test using different delimite (not space)
+    std::string testInfo{ "valid add command" };
+    std::string input{ "add 2 4" };
+    testParse(testInfo, input, "add", "2,4");
+
+    testInfo = "no operation";
+    input = "2 4";
+    testParse(testInfo, input, CalcCommand::NO_OP, "");
+    
+    testInfo = "lots of arguments";
+    input = "sub 2 4 1 2 3 4 5 6 7";
+    testParse(testInfo, input, "sub", "2,4,1,2,3,4,5,6,7");
+
+    testInfo = "float/double arguments";
+    input = "mult 3.0 4.6";
+    testParse(testInfo, input, "mult", "3,4");
+
+    testInfo = "no arguments";
+    input = "div";
+    testParse(testInfo, input, "", "");
+
+    testInfo = "multiple operations";
+    input = "add sub 2 4";
+    testParse(testInfo, input, "", "");
+
+    testInfo = "out of order command";
+    input = "2 4 add";
+    testParse(testInfo, input, "", "");
+
+    testInfo = "invalid delimiter";
+    input = "add/2/4";
+    testParse(testInfo, input, "", "");
+
+    testInfo = "invalid operation";
+    input = "exp 3 4";
+    testParse(testInfo, input, "", "");
+
+    testInfo = "invalid arguments";
+    input = "add . t";
+    testParse(testInfo, input, "", "");
+
+    testInfo = "large int";
+    input = "add 11111111223334444555686886868686868 2";
+    testParse(testInfo, input, "", "");
     
     std::cout << "Woot woot, all tests passed!!" << std::endl;
 
     return 0;
 }
 
-void testGetOperation(CalcCommand &cc, std::string expected) {
-    std::cout << " Testing getOperation() -> expecting: " + expected << std::endl;
-    assert(cc.getOperation() == expected);
-}
 std::string vectorToString(const std::vector<int> &v) {
     if (v.size() <= 0) { return ""; }
 
@@ -51,18 +71,15 @@ std::string vectorToString(const std::vector<int> &v) {
     ss << v[v.size() - 1];
     return ss.str();
 }
-void testGetArguments(CalcCommand &cc, std::string expected) {
-    std::cout << " Testing getArguments() -> expecting: " + expected << std::endl;
-    assert(vectorToString(cc.getArguments()) == expected);
-}
-void testCommandless(CalcCommand &cc, bool expected) {
-    std::cout << " Testing commandless() -> expecting: " << expected << std::endl;
-    assert(cc.commandless() == expected);
-}
-void testSuite(CalcCommand &cc, std::string expectedOp, std::string expectedArgs, bool expectedCommandless) {
-    std::cout << "Testing CalcCommand{ '" + expectedOp + "', {" + expectedArgs + "} }" << std::endl;
-    testGetOperation(cc, expectedOp);
-    testGetArguments(cc, expectedArgs);
-    testCommandless(cc, expectedCommandless);
-    std::cout << std::endl;
+void testParse(const std::string &testInfo, const std::string &input, 
+    const std::string &expected_op, const std::string &expected_args) {
+    std::cout << testInfo << std::endl;
+    std::cout << "Testing parse() -> expecting a calc command with: " << 
+        expected_op << " " << expected_args << std::endl << std::endl;
+    CalcCommandParser ccParser{};
+    
+    CalcCommand cCommand{ ccParser.parse(input) };
+
+    assert(cCommand.getOperation() == expected_op &&
+        vectorToString(cCommand.getArguments()) == expected_args);
 }

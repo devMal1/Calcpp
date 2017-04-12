@@ -1,4 +1,5 @@
 #include "calcCommandParser.h"
+#include <exception>
 
 CalcCommandParser::CalcCommandParser() {}
 
@@ -27,14 +28,19 @@ std::string CalcCommandParser::extractOperation(const std::vector<std::string> &
             return op;
         }
     }
-    return "";
+    return CalcCommand::NO_OP;
 }
 
 std::vector<int> CalcCommandParser::extractArguments(const std::vector<std::string> &tokens) const {
     const int NUM_OF_OPS = CalcCommandParser::OP_INDEX + 1;
     std::vector<int> arguments{};
     for (unsigned int i = NUM_OF_OPS; i < tokens.size(); i ++) {
-        arguments.push_back(stoi(tokens[i]));
+        try {
+            arguments.push_back(stoi(tokens[i]));
+        } catch (const std::exception &ex) {
+            std::vector<int> empty{};
+            return empty;
+        }
     }
     return arguments;
 }
@@ -47,8 +53,14 @@ CalcCommand CalcCommandParser::parse(const std::string &input) const {
     operation = extractOperation(tokens);
     arguments = extractArguments(tokens);
 
-    CalcCommand cc{ operation, arguments };
-    return cc;
+    bool invalidCommand = (operation.length() == 0 || arguments.size() == 0);
+    if (invalidCommand) {
+        CalcCommand cc{};
+        return cc;
+    } else {
+        CalcCommand cc{ operation, arguments };
+        return cc;
+    }
 }
 
 const char CalcCommandParser::DELIMITER = ' ';
