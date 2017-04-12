@@ -9,6 +9,6 @@ class CalcComputer {
     public:
     CalcCommandParser();
     ~CalcCommandParser();
-    int calculate(const CalcCommand &command);
+    int compute(const CalcCommand &command);
     
 };
