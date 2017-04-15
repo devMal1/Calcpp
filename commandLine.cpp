@@ -24,3 +24,8 @@ std::string CommandLine::prompt(const std::string &message) const {
     std::cout << LINE_FIRST_CHAR;
     return read();
 }
+
+std::string CommandLine::prompt() const {
+    std::cout << LINE_FIRST_CHAR;
+    return read();
+}

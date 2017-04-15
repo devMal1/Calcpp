@@ -13,4 +13,5 @@ class CommandLine {
     void write(const std::string &message) const;
     void write(int number) const;
     std::string prompt(const std::string &message) const;
+    std::string prompt() const;
 };
