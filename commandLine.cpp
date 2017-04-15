@@ -15,6 +15,10 @@ void CommandLine::write(const std::string &message) const {
     std::cout << message << std::endl;
 }
 
+void CommandLine::write(int number) const {
+    std::cout << number << std::endl;
+}
+
 std::string CommandLine::prompt(const std::string &message) const {
     write(message);
     std::cout << LINE_FIRST_CHAR;

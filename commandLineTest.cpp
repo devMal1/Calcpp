@@ -3,6 +3,7 @@
 #include <iostream>
 
 void testWrite(CommandLine &console, const std::string &message);
+void testWrite(CommandLine &console, int message);
 void testPrompt(CommandLine &console, const std::string &message);
 
 int main() {
@@ -26,6 +27,8 @@ int main() {
     //test write numbers
     message = "1 20 300 4";
     testWrite(console, message);
+    //test write number
+    testWrite(console, -59848474);
 
     std::cout << "Testing prompt method..." << std::endl;
     //test prompt number input
@@ -50,6 +53,14 @@ int main() {
 }
 
 void testWrite(CommandLine &console, const std::string &message) {
+    std::cout << "Testing ('" << message << "')" << std::endl;
+    std::cout << "____" << std::endl;
+    console.write(message);
+    std::cout << "____" << std::endl;
+    std::cout << std::endl;
+}
+
+void testWrite(CommandLine &console, int message) {
     std::cout << "Testing ('" << message << "')" << std::endl;
     std::cout << "____" << std::endl;
     console.write(message);
