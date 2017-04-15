@@ -10,4 +10,7 @@ class CalcComputer {
     CalcComputer();
     ~CalcComputer();
     int compute(const CalcCommand &command);
+    static const int NOT_ENOUGH_ARGUMENTS;
+    static const int INVALID_OPERATION;
+    static const int DIV_BY_ZERO;
 };

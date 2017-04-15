@@ -14,7 +14,7 @@ int mult(int a, int b) {
     return (a * b);
 }
 int divi(int a, int b) {
-    if (b == 0) { throw -3; } //TODO: throw error for invalid argument
+    if (b == 0) { throw CalcComputer::DIV_BY_ZERO; }
     return (a / b);
 }
 
@@ -29,7 +29,7 @@ int CalcComputer::reduce(const std::vector<int> &nums, int (*reducer)(int, int))
 }
 
 int CalcComputer::compute(const CalcCommand &command) {
-    if (command.getArguments().size() < 1) { throw -1; } //TODO: throw error, for not enough arguments
+    if (command.getArguments().size() < 1) { throw NOT_ENOUGH_ARGUMENTS; }
     
     std::string op{ command.getOperation() };
     if (op == "add") { return reduce(command.getArguments(), add); } //TODO: SHOULD BE ENUMS????
@@ -37,5 +37,9 @@ int CalcComputer::compute(const CalcCommand &command) {
     if (op == "mult") { return reduce(command.getArguments(), mult); }
     if (op == "div") { return reduce(command.getArguments(), divi); }
     
-    throw -2; //TODO: throw error, for invalid operation
+    throw INVALID_OPERATION;
 }
+
+const int CalcComputer::NOT_ENOUGH_ARGUMENTS = -1000;
+const int CalcComputer::INVALID_OPERATION = -2000;
+const int CalcComputer::DIV_BY_ZERO = -3000;

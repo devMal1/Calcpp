@@ -9,24 +9,23 @@ void testCompute(const std::string &testInfo, const std::string &operation,
     const std::vector<int> &arguments, int expected);
 
 int main() {
-    const int ERROR{ -9999 };
 
     testCompute("valid add", "add", {1,2,3}, 6);
     testCompute("valid sub", "sub", {1,2,3}, -4);
     testCompute("valid mult", "mult", {1,2,3}, 6);
     testCompute("valid div", "div", {6,-3,1}, -2);
     
-    // testCompute("invalid operation", "exp", {6,-3,1}, ERROR);
+    testCompute("invalid operation", "exp", {6,-3,1}, CalcComputer::INVALID_OPERATION);
 
-    // testComputer("divide by zero", "div", {5,0}, ERROR); //TODO: Add errors in impl. then add try catch
+    testCompute("divide by zero", "div", {5,0}, CalcComputer::DIV_BY_ZERO);
 
     testCompute("one argument", "div", {6}, 6);
 
-    // testCompute("no arguments", "div", {}, ERROR);
+    testCompute("no arguments", "div", {}, CalcComputer::NOT_ENOUGH_ARGUMENTS);
 
-    // testCompute("no operation", "", {6,-3,1}, ERROR);
+    testCompute("no operation", "", {6,-3,1}, CalcComputer::INVALID_OPERATION);
 
-    // testCompute("multiple operations", "div add", {6,-3,1}, ERROR);
+    testCompute("multiple operations", "div add", {6,-3,1}, CalcComputer::INVALID_OPERATION);
 
     std::cout << "Woot woot, all tests passed!!" << std::endl;
 
@@ -40,7 +39,13 @@ void testCompute(const std::string &testInfo, const std::string &operation,
     CalcComputer computer{};
     CalcCommand command{ operation, arguments };
     
-    int ans = computer.compute(command);
+    int ans{};
+    try {
+        ans = computer.compute(command);
+    } catch (int ex) {
+        assert(ex == expected);
+        return;
+    }
 
     assert(ans == expected);
 }
