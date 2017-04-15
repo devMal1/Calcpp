@@ -4,8 +4,6 @@
 #include "calcComputer.h"
 #include <string>
 
-void helpInfo(const CommandLine &cli);
-
 int main() {
     const std::string START_MESSAGE{ "Welcome, you're calc is ready for use...'" };
     const std::string HELP_MESSAGE{ "***add help message***" };
@@ -17,13 +15,12 @@ int main() {
     cli.write(START_MESSAGE);
     cli.write(HELP_MESSAGE);
 
-    //TODO: save ans to computer.prevAnswer;
+    //TODO: add 'ans' functionality (in parser and computer)
     //TODO: add feature for auto complete
     //TODO: add a USEFUL help message
-    //TODO: add a prompt() function to commandLine
 
     while (!quit) {
-        std::string input{ cli.prompt("type your command") };
+        std::string input{ cli.prompt() };
         CalcCommand command{ parser.parse(input) };
         try {
             int ans{ computer.compute(command) };
