@@ -15,6 +15,8 @@ int main() {
     cli.write(START_MESSAGE);
     cli.write(HELP_MESSAGE);
 
+    //TODO: add 'ans' functionality (in parser and computer)
+    //TODO: add feature for auto complete
 
     while (!quit) {
         std::string input{ cli.prompt() };
