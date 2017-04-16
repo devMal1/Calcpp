@@ -32,7 +32,7 @@ int CalcComputer::compute(const CalcCommand &command) {
     if (command.getArguments().size() < 1) { throw NOT_ENOUGH_ARGUMENTS; }
     
     std::string op{ command.getOperation() };
-    if (op == "add") { return reduce(command.getArguments(), add); } //TODO: SHOULD BE ENUMS????
+    if (op == "add") { return reduce(command.getArguments(), add); }
     if (op == "sub") { return reduce(command.getArguments(), sub); }
     if (op == "mult") { return reduce(command.getArguments(), mult); }
     if (op == "div") { return reduce(command.getArguments(), divi); }
