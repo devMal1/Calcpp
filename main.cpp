@@ -5,8 +5,8 @@
 #include <string>
 
 int main() {
-    const std::string START_MESSAGE{ "Welcome, you're calc is ready for use...'" };
-    const std::string HELP_MESSAGE{ "***add help message***" };
+    const std::string START_MESSAGE{ "Welcome, your calc is ready for use... (type 'quit' to quit)\n" };
+    const std::string HELP_MESSAGE{ "syntax: <operation> <list of space-separated numbers>\noperations: { add, sub, mult, div }\nexample: add 5 -1 2 3\n" };
     CommandLine cli{};
     CalcCommandParser parser{};
     CalcComputer computer{};
@@ -15,9 +15,6 @@ int main() {
     cli.write(START_MESSAGE);
     cli.write(HELP_MESSAGE);
 
-    //TODO: add 'ans' functionality (in parser and computer)
-    //TODO: add feature for auto complete
-    //TODO: add a USEFUL help message
 
     while (!quit) {
         std::string input{ cli.prompt() };
