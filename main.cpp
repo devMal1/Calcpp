@@ -1,7 +1,7 @@
-#include "commandLine.h"
-#include "calcCommand.h"
-#include "calcCommandParser.h"
-#include "calcComputer.h"
+#include "Console/commandLine.h"
+#include "Command/calcCommand.h"
+#include "Parser/calcCommandParser.h"
+#include "Computer/calcComputer.h"
 #include <string>
 
 int main() {
@@ -15,6 +15,8 @@ int main() {
     cli.write(START_MESSAGE);
     cli.write(HELP_MESSAGE);
 
+    //TODO: add 'ans' functionality (in parser and computer)
+    //TODO: add feature for auto complete
 
     while (!quit) {
         std::string input{ cli.prompt() };
