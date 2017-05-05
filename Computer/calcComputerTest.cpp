@@ -1,5 +1,5 @@
 #include "calcComputer.h"
-#include "calcCommand.h"
+#include "../Command/calcCommand.h"
 #include <iostream>
 #include <assert.h>
 #include <string>

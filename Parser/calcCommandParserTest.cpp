@@ -1,5 +1,5 @@
 #include "calcCommandParser.h"
-#include "calcCommand.h"
+#include "../Command/calcCommand.h"
 #include <assert.h>
 #include <iostream>
 #include <sstream>
