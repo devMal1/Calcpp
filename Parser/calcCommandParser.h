@@ -1,6 +1,6 @@
 #pragma once
 
-#include "calcCommand.h"
+#include "../Command/calcCommand.h"
 #include <string>
 #include <vector>
 

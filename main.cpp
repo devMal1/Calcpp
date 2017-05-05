@@ -1,7 +1,7 @@
-#include "commandLine.h"
-#include "calcCommand.h"
-#include "calcCommandParser.h"
-#include "calcComputer.h"
+#include "Console/commandLine.h"
+#include "Command/calcCommand.h"
+#include "Parser/calcCommandParser.h"
+#include "Computer/calcComputer.h"
 #include <string>
 
 int main() {
