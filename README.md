@@ -3,14 +3,18 @@ A command line calculator application
 
 
 # Project Structure
-## Command
+*Command*
 - A model used to hold the contents of a calculator command (the operation, the arguments)
-## Computer
+
+*Computer*
 - Computes the answer given by the components of the CalcCommand
-## Console
+
+*Console*
 - The interface used for input and output
-## Parser
+
+*Parser*
 - Used to create a CalcCommand given the user input from the console
+
 
 
 # How to run
